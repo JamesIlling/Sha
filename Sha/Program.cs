@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SecureHashAlgorithm
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
