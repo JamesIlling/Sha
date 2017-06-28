@@ -1,0 +1,11 @@
+version: 1.0.{build}
+image:
+- Visual Studio 2015
+- Visual Studio 2017
+before_build:
+  - nuget restore
+build_script:
+  - choco install "msbuild-sonarqube-runner" -y
+  - MSBuild.SonarQube.Runner.exe begin /k:"sha" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=jamesilling-github" /d:"sonar.login=ba7ea9b4ca4473eb8c92ad613bceef46f88b5ce3"
+  - msbuild "Sha.sln"
+  - MSBuild.SonarQube.Runner.exe end /d:"sonar.login=ba7ea9b4ca4473eb8c92ad613bceef46f88b5ce3"
