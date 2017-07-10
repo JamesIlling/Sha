@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using DotNetVersion;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 using SecureHashAlgorithm;
 
@@ -10,15 +7,7 @@ namespace ShaTests
 
     [TestFixture]
     public class HashDetectionTests
-    {
-        [Test]
-        public void TestClr()
-        {
-            var versionDetector = new VersionDetector();
-            var versions = versionDetector.dotNetVersionsInstalled();
-            versions.Any(x => Version.Parse(x) > new Version(4, 6, 2) || Version.Parse(x) == new Version(4, 5, 2)).Should().BeTrue();
-        }
-
+    {     
         [TestCase("Sha1", true)]
         [TestCase("SHA1", true)]
         [TestCase("SHa1", true)]

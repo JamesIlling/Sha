@@ -62,7 +62,6 @@
     <Compile Include="HashDetectionTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VersionDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
