@@ -4,31 +4,19 @@ using System.Text;
 
 namespace SecureHashAlgorithm
 {
-    static class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var options = new Configuration();
             if (CommandLine.Parser.Default.ParseArguments(args, options))
             {
-                HashAlgorithm hashAlgorithm;
-                switch (options.Hash.ToUpper())
+
+                var hashAlgorithm = HashIdentifier.GetHashAlgorithm(options.Hash);
+                if (hashAlgorithm == null)
                 {
-                    case "SHA1":
-                        hashAlgorithm = new SHA1Managed();
-                        break;
-                    case "SHA256":
-                        hashAlgorithm = new SHA256Managed();
-                        break;
-                    case "SHA384":
-                        hashAlgorithm = new SHA384Managed();
-                        break;
-                    case "SHA512":
-                        hashAlgorithm = new SHA512Managed();
-                        break;
-                    default:
-                        Console.WriteLine($"Unknown Hash {options.Hash}");
-                        return;                        
+                    Console.WriteLine($"Unknown hash Algorith {options.Hash}.");
+                    return;
                 }
                 var textToHash = options.Input;
                 if (string.IsNullOrEmpty(textToHash))
@@ -36,15 +24,18 @@ namespace SecureHashAlgorithm
                     Console.WriteLine("No data to hash");
                     return;
                 }
-                var hash = hashAlgorithm.ComputeHash(Encoding.ASCII.GetBytes(textToHash));
-                Console.WriteLine(hash.ToHexString());        
+                Console.WriteLine(hashAlgorithm.GenerateHash(textToHash));
             }                           
-        }    
-    }
+        }
 
-    public static class Extension
-    {
-        public static string ToHexString(this byte[] data)
+
+        private static string GenerateHash(this HashAlgorithm hashAlgorithm, string textToHash)
+        {
+            var hash = hashAlgorithm.ComputeHash(Encoding.ASCII.GetBytes(textToHash));
+            return hash.ToHexString();
+        }
+
+        private static string ToHexString(this byte[] data)
         {
             var hexString = new StringBuilder();
             foreach (var b in data)
