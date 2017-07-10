@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Win32;
 
 namespace DotNetVersion
 {
+    [ExcludeFromCodeCoverage]
     public class VersionDetector
     {
         private const string BaseKey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP";

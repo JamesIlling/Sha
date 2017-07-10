@@ -3,7 +3,7 @@ using CommandLine.Text;
 
 namespace SecureHashAlgorithm
 {
-    class Configuration
+    public class Configuration
     {
         [Option('h', "hash", Required = true, HelpText = "The cryptographic hash to use")]
         public string Hash{ get; set; }

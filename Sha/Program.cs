@@ -4,9 +4,9 @@ using System.Text;
 
 namespace SecureHashAlgorithm
 {
-    static class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var options = new Configuration();
             if (CommandLine.Parser.Default.ParseArguments(args, options))
@@ -15,7 +15,8 @@ namespace SecureHashAlgorithm
                 var hashAlgorithm = HashIdentifier.GetHashAlgorithm(options.Hash);
                 if (hashAlgorithm == null)
                 {
-                    Console.WriteLine($"Unknown hash Algorith {options.Hash}");
+                    Console.WriteLine($"Unknown hash Algorith {options.Hash}.");
+                    return;
                 }
                 var textToHash = options.Input;
                 if (string.IsNullOrEmpty(textToHash))
